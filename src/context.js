@@ -37,5 +37,5 @@ export class Provider extends Component {
   }
 }
 
-// Daca scriem doar "export Context.Consumer;" cand vom vrea sa folosim stat'ul va trebui sa scrie Context.Consumer 
+// If we use "Export Context.Consumer;" when we want to use the state we'll have to write Context.Consumer
 export const Consumer = Context.Consumer;

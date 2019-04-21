@@ -6,7 +6,7 @@ class Contact extends Component {
     showContactInfo: false
   };
 
-  // Se apeleaza o functie a parintelui(avem props)
+  // Call parent function where we have state control
   onDeleteClick = () => {
     this.props.deleteClickHandler();
   }
@@ -14,8 +14,6 @@ class Contact extends Component {
   render() {
     const { name, email, phone } = this.props.contactt;
     const { showContactInfo } = this.state;
-
-    // console.log(this.props.contactt.name);
 
     return (
 
@@ -33,7 +31,7 @@ class Contact extends Component {
 
           <i className="fas fa-times"
             style={{ cursor: 'pointer', float: 'right', color: '#D9534F' }}
-            // Se apeleaza o functie locala onDeleteClick
+            // Call a local function onDeleteClick
             onClick={this.onDeleteClick}
           ></i>
         </h4>

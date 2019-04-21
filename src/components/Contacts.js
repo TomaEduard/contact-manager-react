@@ -7,9 +7,9 @@ class Contacts extends Component {
   deleteContact = (id) => {
     const { contacts } = this.state;
 
+    // cr8 new state without id(param id)
     const newContacts = contacts.filter(e => e.id !== id);
 
-    // copiam statul cu unul nou dar fara id'ul == cu id'ul pe care am dat click
     this.setState({
       contacts: newContacts
     });
@@ -27,7 +27,6 @@ class Contacts extends Component {
                 <Contact
                   key={e.id}
                   contactt={e}
-                  // prin bind(this, contact.id) luam idul a celui la care am dat click 
                   deleteClickHandler={this.deleteContact.bind(this, e.id)}
 
                 />
