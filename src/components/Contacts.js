@@ -4,17 +4,6 @@ import { Consumer } from '../context';
 
 class Contacts extends Component {
 
-  deleteContact = (id) => {
-    const { contacts } = this.state;
-
-    // cr8 new state without id(param id)
-    const newContacts = contacts.filter(e => e.id !== id);
-
-    this.setState({
-      contacts: newContacts
-    });
-  };
-
   render() {
     return (
       <Consumer>
@@ -27,8 +16,6 @@ class Contacts extends Component {
                 <Contact
                   key={e.id}
                   contactt={e}
-                  deleteClickHandler={this.deleteContact.bind(this, e.id)}
-
                 />
               ))}
 

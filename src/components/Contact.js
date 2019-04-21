@@ -1,57 +1,65 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import { Consumer } from '../context';
 
 class Contact extends Component {
   state = {
     showContactInfo: false
   };
 
-  // Call parent function where we have state control
-  onDeleteClick = () => {
-    this.props.deleteClickHandler();
+  onDeleteClick = (id, dispatch) => {
+    dispatch({ type: 'DELETE_CONTACT', payload: id });
   }
 
   render() {
-    const { name, email, phone } = this.props.contactt;
+    const { id, name, email, phone } = this.props.contactt;
     const { showContactInfo } = this.state;
 
     return (
+      <Consumer>
+        {value => {
 
-      <div className="card card-body mb-3 p-3">
+          const { dispatch } = value;
 
-        <h4>{name}{' '}
+          return (
+            <div className="card card-body mb-3 p-3">
 
-          <i className="fas fa-sort-down"
-            // add pointer
-            style={{ cursor: 'pointer' }}
-            // on click showContactInfo change his state
-            onClick={() => this.setState({
-              showContactInfo: !this.state.showContactInfo
-            })}></i>
+              <h4>{name}{' '}
 
-          <i className="fas fa-times"
-            style={{ cursor: 'pointer', float: 'right', color: '#D9534F' }}
-            // Call a local function onDeleteClick
-            onClick={this.onDeleteClick}
-          ></i>
-        </h4>
+                <i className="fas fa-sort-down"
+                  // add pointer
+                  style={{ cursor: 'pointer' }}
+                  // on click showContactInfo change his state
+                  onClick={() => this.setState({
+                    showContactInfo: !this.state.showContactInfo
+                  })}></i>
+
+                {/* Delete */}
+                <i className="fas fa-times"
+                  style={{ cursor: 'pointer', float: 'right', color: '#D9534F' }}
+                  onClick={this.onDeleteClick.bind(this, id, dispatch)}
+                ></i>
+              </h4>
 
 
-        {/* if showContatInfo is true pirt ul */}
-        {showContactInfo ? (
-          <ul className="list-group">
-            <li className="list-group-item">{email}</li>
-            <li className="list-group-item">{phone}</li>
-          </ul>) : null}
+              {/* if showContatInfo is true pirt ul */}
+              {showContactInfo ? (
+                <ul className="list-group">
+                  <li className="list-group-item">{email}</li>
+                  <li className="list-group-item">{phone}</li>
+                </ul>) : null}
 
-      </div >
+            </div >
+          )
+        }}
+      </Consumer>
+
     )
   }
 }
 
 Contact.proptotype = {
   contact: PropTypes.object.isRequired,
-  deleteClickHandler: PropTypes.func.isRequired
 };
 
 export default Contact;

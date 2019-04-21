@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 
 const Context = React.createContext();
+const reducer = (state, action) => {
+
+  switch (action.type) {
+    case 'DELETE_CONTACT':
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          e => e.id !== action.payload)
+      }
+    default:
+      return state;
+  }
+
+}
 
 export class Provider extends Component {
   state = {
@@ -23,11 +37,16 @@ export class Provider extends Component {
         name: 'Henry Jhonson',
         email: 'henry@gmail.com',
         phone: '111-222-444'
-      },
+      }
 
-    ]
+    ],
+
+    dispatch: action => {
+      this.setState(state => reducer(state, action))
+    }
   }
 
+  // Share state to anybody want to use objects or action
   render() {
     return (
       <Context.Provider value={this.state}>
