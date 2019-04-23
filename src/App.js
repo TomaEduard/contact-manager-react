@@ -8,7 +8,7 @@ import { Provider } from './context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./bootstrap.min.css";
 import "./App";
-  
+
 class App extends Component {
   render() {
     return (
