@@ -37,8 +37,7 @@ class Contact extends Component {
                 {/* Delete */}
                 <i className="fas fa-times"
                   style={{ cursor: 'pointer', float: 'right', color: '#D9534F' }}
-                  onClick={this.onDeleteClick.
-                    bind(this, id, dispatch)}
+                  onClick={this.onDeleteClick.bind(this, id, dispatch)}
                 ></i>
               </h4>
 

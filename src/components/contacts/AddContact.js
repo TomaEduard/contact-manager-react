@@ -102,8 +102,7 @@ class AddContact extends Component {
 
 
 
-                  <form onSubmit={this.onSubmit.
-                    bind(this, dispatch)}>
+                  <form onSubmit={this.onSubmit.bind(this, dispatch)}>
 
                     <div className="form-group">
 
@@ -111,8 +110,7 @@ class AddContact extends Component {
 
                       <input
                         type="text"
-                        className={classnames
-                          ('form-control', { 'is-invalid': errorsName })}
+                        className={classnames('form-control', { 'is-invalid': errorsName })}
                         placeholder="Name . . . "
                         name="name"
                         value={name}
@@ -146,8 +144,7 @@ class AddContact extends Component {
 
                       {<input
                         type="phone"
-                        className={classnames
-                          ('form-control', { 'is-invalid': errorsPhone })}
+                        className={classnames('form-control', { 'is-invalid': errorsPhone })}
                         placeholder="Phone Number . . . "
                         name="phone"
                         value={phone}
