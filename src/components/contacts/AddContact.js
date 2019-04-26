@@ -51,6 +51,9 @@ class AddContact extends Component {
       phone: '',
       errors: {}
     });
+
+    // redirect to root page
+    this.props.history.push('/');
   };
 
   // onNameChange = (e) => this.setState({ name: e.target.value });
@@ -87,75 +90,84 @@ class AddContact extends Component {
           const { dispatch } = value;
 
           return (
-            < div className="card mb-3" >
-              <div className="card-header">Add Contact</div>
-              <div className="card-body">
+            <React.Fragment>
 
-                <form onSubmit={this.onSubmit.
-                  bind(this, dispatch)}>
+              <h1 className="display-6 mb-2">
+                <span className="text-danger">Add Contact</span>
+              </h1>
 
-                  <div className="form-group">
+              < div className="card mb-3" >
+                <div className="card-header">Add Contact</div>
+                <div className="card-body">
 
-                    <label htmlFor="name">Name</label>
+
+
+                  <form onSubmit={this.onSubmit.
+                    bind(this, dispatch)}>
+
+                    <div className="form-group">
+
+                      <label htmlFor="name">Name</label>
+
+                      <input
+                        type="text"
+                        className={classnames
+                          ('form-control', { 'is-invalid': errorsName })}
+                        placeholder="Name . . . "
+                        name="name"
+                        value={name}
+                        // onNameChange={this.onChange}
+                        onChange={this.onChange}
+                        error={errorsName}
+                      />
+                      {errorsName && <div className="invalid-feedback">{errorsName}</div>}
+
+                    </div>
+
+                    <div className="form-group">
+
+                      <label htmlFor="email">Email</label>
+
+                      <input
+                        type="email"
+                        className={classnames('form-control', { 'is-invalid': errorsEmail })}
+                        placeholder="Email . . . "
+                        name="email"
+                        value={email}
+                        onChange={this.onChange}
+                        error={errorsEmail}
+                      />
+                      {errorsEmail && <div className="invalid-feedback">{errorsEmail}</div>}
+                    </div>
+
+                    <div className="form-group">
+
+                      <label htmlFor="name">Phone</label>
+
+                      {<input
+                        type="phone"
+                        className={classnames
+                          ('form-control', { 'is-invalid': errorsPhone })}
+                        placeholder="Phone Number . . . "
+                        name="phone"
+                        value={phone}
+                        onChange={this.onChange}
+                        error={errorsPhone}
+                      />}
+                      {errorsPhone && <div className="invalid-feedback">{errorsPhone}</div>}
+                    </div>
 
                     <input
-                      type="text"
-                      className={classnames
-                        ('form-control', { 'is-invalid': errorsName })}
-                      placeholder="Name . . . "
-                      name="name"
-                      value={name}
-                      // onNameChange={this.onChange}
-                      onChange={this.onChange}
-                      error={errorsName}
+                      type="submit"
+                      value="Add Contact"
+                      className="btn btn-outline-primary btn-block btn-word"
                     />
-                    {errorsName && <div className="invalid-feedback">{errorsName}</div>}
 
-                  </div>
+                  </form>
+                </div>
+              </div >
 
-                  <div className="form-group">
-
-                    <label htmlFor="email">Email</label>
-
-                    <input
-                      type="email"
-                      className={classnames('form-control', { 'is-invalid': errorsEmail })}
-                      placeholder="Email . . . "
-                      name="email"
-                      value={email}
-                      onChange={this.onChange}
-                      error={errorsEmail}
-                    />
-                    {errorsEmail && <div className="invalid-feedback">{errorsEmail}</div>}
-                  </div>
-
-                  <div className="form-group">
-
-                    <label htmlFor="name">Phone</label>
-
-                    {<input
-                      type="phone"
-                      className={classnames
-                        ('form-control', { 'is-invalid': errorsPhone })}
-                      placeholder="Phone Number . . . "
-                      name="phone"
-                      value={phone}
-                      onChange={this.onChange}
-                      error={errorsPhone}
-                    />}
-                    {errorsPhone && <div className="invalid-feedback">{errorsPhone}</div>}
-                  </div>
-
-                  <input
-                    type="submit"
-                    value="Add Contact"
-                    className="btn btn-outline-primary btn-block btn-word"
-                  />
-
-                </form>
-              </div>
-            </div >
-
+            </React.Fragment>
           )
         }}
 

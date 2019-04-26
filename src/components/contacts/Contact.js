@@ -22,7 +22,7 @@ class Contact extends Component {
           const { dispatch } = value;
 
           return (
-            <div className="card card-body mb-3 p-3">
+            <div className="card card-body mb-3">
 
               <h4>{name}{' '}
 
