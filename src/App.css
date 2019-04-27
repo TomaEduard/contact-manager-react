@@ -1,4 +1,6 @@
-.btn {
-  color: aqua;
-  letter-spacing: 5px;
+.edit {
+  cursor: pointer;
+  float: right;
+  color: rgb(82, 215, 255);
+  margin-right: 1rem;
 }

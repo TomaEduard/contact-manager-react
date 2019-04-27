@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import Axios from 'axios';
 
-
-class AddContact extends Component {
+class EditContact extends Component {
   state = {
     name: '',
     email: '',
@@ -13,8 +12,19 @@ class AddContact extends Component {
     errorsName: '',
     errorsEmail: '',
     errorsPhone: ''
-
   };
+
+  async componentDidMount() {
+    const { id } = this.props.match.params;
+    const res = await Axios.get(`http://jsonplaceholder.typicode.com/users/${id}`);
+
+    const contact = res.data;
+    this.setState({
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone
+    });
+  }
 
   // cr8 object with user input values
   onSubmit = async (dispatch, e) => {
@@ -35,16 +45,18 @@ class AddContact extends Component {
       return;
     }
 
-    const newContact = {
+    const updateContact = {
       name,
       email,
-      phone,
-    };
+      phone
+    }
 
-    const res = await axios
-      .post('http://jsonplaceholder.typicode.com/users', newContact)
+    const { id } = this.props.match.params;
 
-    dispatch({ type: 'ADD_CONTACT', payload: res.data })
+    // if contact doesn't have id, it will come from res
+    const res = await Axios.put(`http://jsonplaceholder.typicode.com/users/${id}`, updateContact);
+
+    dispatch({ type: 'UPDATE_CONTACT', payload: res.data })
 
     // Clear state
     this.setState({
@@ -94,12 +106,12 @@ class AddContact extends Component {
           return (
             <React.Fragment>
 
-              <h1 className="display-6 mb-2">
-                <span className="text-danger">Add Contact</span>
-              </h1>
+              {/* <h1 className="display-6 mb-2">
+                <span className="text-danger">Edit Contact</span>
+              </h1> */}
 
               < div className="card mb-3" >
-                <div className="card-header">Add Contact</div>
+                <div className="card-header">Edit Contact</div>
                 <div className="card-body">
 
                   <form onSubmit={this.onSubmit.bind(this, dispatch)}>
@@ -156,7 +168,7 @@ class AddContact extends Component {
 
                     <input
                       type="submit"
-                      value="Add Contact"
+                      value="Update Contact"
                       className="btn btn-outline-primary btn-block btn-word"
                     />
 
@@ -174,7 +186,7 @@ class AddContact extends Component {
   }
 }
 
-AddContact.proptotype = {
+EditContact.proptotype = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
@@ -184,4 +196,4 @@ AddContact.proptotype = {
   error: PropTypes.string
 };
 
-export default AddContact;
+export default EditContact;
