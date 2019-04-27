@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../context';
-import uuid from 'uuid';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 
 class AddContact extends Component {
@@ -21,12 +21,6 @@ class AddContact extends Component {
     e.preventDefault();
     const { name, email, phone } = this.state;
 
-    const newContact = {
-      id: uuid(),
-      name,
-      email,
-      phone,
-    };
 
     // Check for errors
     if (name === '') {
@@ -42,9 +36,17 @@ class AddContact extends Component {
       return;
     }
 
-    // Call dispatch function with ADD_CONTACT type
-    dispatch({ type: 'ADD_CONTACT', payload: newContact });
+    const newContact = {
+      name,
+      email,
+      phone,
+    };
 
+    axios
+      .post('http://jsonplaceholder.typicode.com/users', newContact)
+      .then(res => dispatch({ type: 'ADD_CONTACT', payload: res.data }));
+
+    // Clear state
     this.setState({
       name: '',
       email: '',

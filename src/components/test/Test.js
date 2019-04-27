@@ -6,29 +6,32 @@ class Test extends Component {
     body: ''
   };
 
-  // fetch req
-  componentDidMount() {
-    fetch('http://jsonplaceholder.typicode.com/posts/1')
-      .then(response => response.json())
-      .then(data => this.setState({
-        title: data.title,
-        body: data.body
-      }))
-  }
+  // // axios req
+  // componentDidMount() {
+  //   axios.get('http://jsonplaceholder.typicode.com/users')
+  //     .then(res => this.setState({ contacts: res.data }))
+  // }
+
+  // // fetch req
+  // componentDidMount() {
+  //   fetch('http://jsonplaceholder.typicode.com/posts/1')
+  //     .then(response => response.json())
+  //     .then(data => this.setState({
+  //       title: data.title,
+  //       body: data.body
+  //     }))
+  // }
 
   // componentWillMount() {
   //   console.log('componentWillMount...');
-
   // }
 
   // componentDidUpdate() {
   //   console.log('componentDidUpdate...');
-
   // }
 
   // componentWillReceiveProps(nextProps, nextState) {
   //   console.log('componentWillReceiveProps...');
-
   // }
 
   // static getDerivedStateFromProps(props, state)
