@@ -32,9 +32,12 @@ export class Provider extends Component {
     }
   };
 
-  componentDidMount() {
-    axios.get('http://jsonplaceholder.typicode.com/users')
-      .then(res => this.setState({ contacts: res.data }))
+  // load state with axios req
+  async componentDidMount() {
+    const res = await axios
+      .get('http://jsonplaceholder.typicode.com/users')
+
+    this.setState({ contacts: res.data })
   }
 
   // Share state to anybody want to use objects or action

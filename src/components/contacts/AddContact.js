@@ -17,10 +17,9 @@ class AddContact extends Component {
   };
 
   // cr8 object with user input values
-  onSubmit = (dispatch, e) => {
+  onSubmit = async (dispatch, e) => {
     e.preventDefault();
     const { name, email, phone } = this.state;
-
 
     // Check for errors
     if (name === '') {
@@ -42,9 +41,10 @@ class AddContact extends Component {
       phone,
     };
 
-    axios
+    const res = await axios
       .post('http://jsonplaceholder.typicode.com/users', newContact)
-      .then(res => dispatch({ type: 'ADD_CONTACT', payload: res.data }));
+
+    dispatch({ type: 'ADD_CONTACT', payload: res.data })
 
     // Clear state
     this.setState({
